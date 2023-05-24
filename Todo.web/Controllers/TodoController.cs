@@ -17,7 +17,7 @@ namespace Todo.web.Controllers
         public IActionResult ListeTodo()
         {
             var todos = _todoService.GetAllTodos();
-            return View(todos.Select(e => FromDetailsToViewModel(e)));
+            return View(todos.OrderBy(e => e.Id).Select(e => FromDetailsToViewModel(e)));
         }
 
         public IActionResult DetailsTodo(int id)
@@ -36,11 +36,48 @@ namespace Todo.web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var maxId = _todoService.GetAllTodos().Select(e => e.Id).Max();
-                model.Id = maxId + 1;
+                var todos = _todoService.GetAllTodos().Select(e => e.Id);
+                if (todos.Count() == 0)
+                    model.Id = 0;
+                else
+                    model.Id = todos.Max() + 1;
                 model.CreatedDate = DateTime.Now;
                 _todoService.AddTodo(FromViewModelToDetails(model));
                 return RedirectToAction("AjouterTodo");
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult ModifierTodo(int id)
+        {
+            return View(FromDetailsToViewModel(_todoService.GetTodo(id)));
+        }
+
+        [HttpPost]
+        public IActionResult ModifierTodo(TodoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _todoService.UpdateTodo(FromViewModelToDetails(model));
+                return RedirectToAction("ModifierTodo", model.Id);
+            }
+            return View(model);
+        }
+
+        [HttpGet]
+        public IActionResult SupprimerTodo(int id)
+        {
+            return View(FromDetailsToViewModel(_todoService.GetTodo(id)));
+        }
+
+        [HttpPost]
+        public IActionResult SupprimerTodo(TodoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                _todoService.DeleteTodo(model.Id);
+                return RedirectToAction("ListeTodo");
             }
             return View(model);
         }

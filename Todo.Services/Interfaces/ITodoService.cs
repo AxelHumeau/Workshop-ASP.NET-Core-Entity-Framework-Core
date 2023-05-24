@@ -12,5 +12,7 @@ namespace Todo.Services.Interfaces
         IEnumerable<TodoDetails> GetAllTodos();
         TodoDetails GetTodo(int id);
         TodoDetails AddTodo(TodoDetails todo);
+        TodoDetails DeleteTodo(int id);
+        TodoDetails UpdateTodo(TodoDetails todo);
     }
 }

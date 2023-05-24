@@ -1,23 +1,9 @@
 [
   {
     "Id": 1,
-    "Name": "test 1",
-    "Description": "hello world",
-    "EndDate": "0003-11-07T03:02:00",
-    "CreatedDate": "2023-03-18T17:24:55.313134+01:00"
-  },
-  {
-    "Id": 2,
-    "Name": "test 2",
-    "Description": "bonjour je m'appelle bobby",
-    "EndDate": "2023-08-12T00:00:00",
-    "CreatedDate": "2023-03-18T17:35:02.6397873+01:00"
-  },
-  {
-    "Id": 3,
-    "Name": "v^fe",
-    "Description": "reb",
-    "EndDate": "2023-03-22T00:00:00",
-    "CreatedDate": "2023-03-22T13:42:07.5658911+01:00"
+    "Name": "Finir le workshop",
+    "Description": "Terminer les exercices ^^",
+    "EndDate": "2023-05-30T16:30:00",
+    "CreatedDate": "2023-05-24T19:05:25.5570618+02:00"
   }
 ]

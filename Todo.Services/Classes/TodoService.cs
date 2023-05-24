@@ -24,8 +24,8 @@ namespace Todo.Services.Classes
         {
             var todos = GetAllTodos();
             todos = todos.Append(todo);
-            string newJsonStrind = JsonConvert.SerializeObject(todos, Formatting.Indented);
-            File.WriteAllText(_path, newJsonStrind);
+            string newJsonString = JsonConvert.SerializeObject(todos, Formatting.Indented);
+            File.WriteAllText(_path, newJsonString);
             return todo;
         }
 
@@ -39,7 +39,23 @@ namespace Todo.Services.Classes
         public TodoDetails GetTodo(int id)
         {
             return GetAllTodos().Single(e => e.Id == id);
+        }
 
+        public TodoDetails DeleteTodo(int id)
+        {
+            var deletedTodo = GetTodo(id);
+            var todos = GetAllTodos().Where(e => e.Id != id);
+            string newJsonString = JsonConvert.SerializeObject(todos, Formatting.Indented);
+            File.WriteAllText(_path, newJsonString);
+            return deletedTodo;
+        }
+
+        public TodoDetails UpdateTodo(TodoDetails todo)
+        {
+            var todos = GetAllTodos().Where(e => e.Id != todo.Id).Append(todo);
+            string newJsonString = JsonConvert.SerializeObject(todos, Formatting.Indented);
+            File.WriteAllText(_path, newJsonString);
+            return todo;
         }
     }
 }
