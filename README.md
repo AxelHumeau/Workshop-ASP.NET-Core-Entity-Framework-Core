@@ -7,6 +7,8 @@ Au cours du workshop n'hésitez pas à chercher sur Internet, sur la [documentat
 
 **Sauf précision, toutes les classes/méthodes/propriétés/champs doivent être publiques**
 
+ <hr/>
+
 # Exercice 0
 Dans ce repo vous est fourni une base d'application à modifier, quand vous lancer Visual Studio, choisissez de cloner un repository et utiliser l'url https pour clone.
 
@@ -14,6 +16,8 @@ Dans ce repo vous est fourni une base d'application à modifier, quand vous lanc
 
 Vous devrez avoir l'application web de prête, lancez-là et vérifier que tout fonctionne (appelez nous en cas de problème).
 Vous pouvez explorer un peu l'application pour comprendre le fonctionnement de celle-çi.
+
+ <hr/>
 
 # Exercice 1
 Avant de faire nos modifications, il faut avant tout créer notre base de données !
@@ -38,6 +42,7 @@ Entity Framework Core nous permet de gérer notre base de données avec des obje
  - une Description (obligatoire) et avec une longueur maximum de 255,
  - une date de fin (obligatoire)
  - et une date de création (obligatoire)
+
 Pour cela on va d'abord créer un dossier Models dans le projet Todo.DataAccess, puis créer une classe Todo dans un fichier Todo.cs à l'intérieur du dossier Models.
 Les propriétés de la classe sont très similaires à Todo.Services.Models.TodoDetails, vous pouvez donc les copier pour commencer, et ensuite ajouter des attributs
 au propriétés. Je vous invite à chercher ce que sont les attributs quel attributs utiliser pour que notre classe décrive notre table.
@@ -68,7 +73,7 @@ public class TodoDbContext : DbContext
  _connectionString est un champ de la classe decrivant une chaine de caractère permettant de se connecter à la database<br/><br/>
  Todos est un DbSet de la classe Todo, il représente la table Todos dans la base de données<br/><br/>
  TodoDbContext(DbContextOptions<TodoDbContext> options) est le constructeur de la classe<br/><br/>
- OnConfiguring est une méthode qui permet de changer les paramètres de configuration, ici on ajoute aux options le fait d'utiliser SQL Server pour ce que connecter à notre base de donnée.
+ OnConfiguring est une méthode qui permet de changer les paramètres de configuration, ici on ajoute aux options le fait d'utiliser SQL Server pour ce que connecter à notre base de donnée.<br/>
 </details>
 
 À noter que cette manière de configurer le DbContext n'est pas la seule et pas la meilleure (notament au niveau de la connectionString en brut), par exemple on pourrait vouloir utiliser d'autre outils de base de données SQL comme SQLite ou MySQL.
@@ -76,6 +81,8 @@ public class TodoDbContext : DbContext
 Enfin ouvrez le "Package Manager Console", définissez Todo.DataAccess en tant que projet par défaut, et entrez la commande `Add-Migration Init`, cette commande créera une migration du nom de Init (plus d'infos sur les migrations [ici](https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)). Puis ensuite entrer la commande `Update-Database` pour mettre à jour la base de données. Maintenant vous pouvez inspecter la base de donnée via le SQL Server Object Explorer pour vérifier si la database à bien été mise à jour.
  
 Finissez par ajouter une dépendance à Todo.DataAccess dans le projet Todo.Services.
+ 
+ <hr/>
  
 # Exercice 2
 Maintenant il faut pouvoir utiliser le contexte pour effectué des actions sur notre base de données. Pour cela, ajoutez un champ **privé** TodoDbContext dans la classe TodoService, et donnez lui sa valeur grâce à un paramètre du même type dans le constructeur.
@@ -105,5 +112,7 @@ Vous avez une application qui fait de belles action CRUD dans la base de donnée
 # Exercice 3
 Il manque la gestion d'erreur, ce serait bête si l'application crash quand on demande une to-dos inexistante.
 Pensez à comment gérer les erreurs, il y a plein de façons de faire différentes qui peuvent marcher.
- 
-Félicitation, vous avez fini le bootstrap, si vous voulez aller plus, vous pouvez ajouter une colonne pour le status de la to-do (à faire, en cours, finie) et donc faire une nouvelle migration de la base de donnée.
+
+ <hr/>
+
+Félicitation, vous avez fini le workshop, si vous voulez aller plus, vous pouvez ajouter une colonne pour le status de la to-do (à faire, en cours, finie) et donc faire une nouvelle migration de la base de donnée.
