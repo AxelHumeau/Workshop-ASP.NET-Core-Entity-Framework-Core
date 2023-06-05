@@ -48,15 +48,15 @@ Les propriétés de la classe sont très similaires à Todo.Services.Models.Todo
 au propriétés. Je vous invite à chercher ce que sont les attributs quel attributs utiliser pour que notre classe décrive notre table.
 
 ### Le DbContext
-Le DbContext est point central d'Entity Framework Core, il représente la base de données et c'est à partir de celui-çi qu'on effectue des requêtes.
+Le DbContext est le point central d'Entity Framework Core, il représente la base de données et c'est à partir de celui-ci qu'on effectue des requêtes.
 Pour commencer on va créer le fichier TodoDbContext.cs à la racine du projet Todo.DataAccess.
-On va ensuite défini la classe de cette façon:
+On va ensuite définir la classe de cette façon:
 ```c#
 public class TodoDbContext : DbContext
 {
     private string _connectionString { get { return "Server=(localdb)\\mssqllocaldb;Database=TodoAppDatabase"; } }
 
-    public DbSet<Todo.DataAccess.Tables.Todo> Todos { get; set; }
+    public DbSet<Todo.DataAccess.Models.Todo> Todos { get; set; }
 
     public TodoDbContext(DbContextOptions<TodoDbContext> options) : base(options) { }
 
