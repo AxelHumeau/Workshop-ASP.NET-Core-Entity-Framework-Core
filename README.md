@@ -54,26 +54,23 @@ On va ensuite définir la classe de cette façon:
 ```c#
 public class TodoDbContext : DbContext
 {
-    private string _connectionString { get { return "Server=(localdb)\\mssqllocaldb;Database=TodoAppDatabase"; } }
-
     public DbSet<Todo.DataAccess.Models.Todo> Todos { get; set; }
 
     public TodoDbContext(DbContextOptions<TodoDbContext> options) : base(options) { }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        optionsBuilder.UseSqlServer(_connectionString);
-    }
 }
+```
+Puis ajouter une référence au projet Todo.DataAccess dans Todo.Web et ces lignes dans Program.cs:
+```c#
+builder.Services.AddDbContext<TodoDbContext>(options =>
+    options.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TodoAppDatabase"));
 ```
 (N'oubliez pas les using)
 
 <details>
- <summary>Explication</summary>
- _connectionString est un champ de la classe decrivant une chaine de caractère permettant de se connecter à la database<br/><br/>
+ <summary>Quelques explications</summary>
+ `Server=(localdb)\\mssqllocaldb;Database=TodoAppDatabase` est une chaine de caractère permettant de se connecter à la database<br/><br/>
  Todos est un DbSet de la classe Todo, il représente la table Todos dans la base de données<br/><br/>
  TodoDbContext(DbContextOptions<TodoDbContext> options) est le constructeur de la classe<br/><br/>
- OnConfiguring est une méthode qui permet de changer les paramètres de configuration, ici on ajoute aux options le fait d'utiliser SQL Server pour ce que connecter à notre base de donnée.<br/>
 </details>
 
 À noter que cette manière de configurer le DbContext n'est pas la seule et pas la meilleure (notament au niveau de la connectionString en brut), par exemple on pourrait vouloir utiliser d'autre outils de base de données SQL comme SQLite ou MySQL.
