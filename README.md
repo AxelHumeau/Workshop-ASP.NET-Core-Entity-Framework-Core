@@ -1,5 +1,5 @@
 # Prérequis
-Pour ce workshop vous avez besoin de Visual Studio (pas VS Code !) sur Windows. Lors de l'installation, selectionner le workload "ASP.NET and web development".
+Pour ce workshop vous avez besoin de Visual Studio (pas VS Code !) sur Windows. Lors de l'installation, selectionner le workload "ASP.NET and web development" avec au moins ".NET 6.0 Runtime" dans les Composants individuels.
 
 # Introduction
 Le but de ce workshop est de migrer le mode de stockage d'une application web ASP.NET Core de to-dos d'un fichier json à une base de donnée SQL, et utiliser le framework Entity Framework Core pour y effectuer des actions CRUD.
